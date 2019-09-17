@@ -173,7 +173,7 @@ function xhprof_generate_dot_script($raw_data, $threshold, $source, $page,
   $max_fontsize = 35;
   $max_sizing_ratio = 20;
 
-  $totals;
+  $totals = array();
 
   if ($left === null) {
     // init_metrics($raw_data, null, null);
@@ -393,9 +393,9 @@ function xhprof_generate_dot_script($raw_data, $threshold, $source, $page,
 
 function  xhprof_render_diff_image($xhprof_runs_impl, $run1, $run2,
                                    $type, $threshold, $source) {
-  $total1;
-  $total2;
-
+  $total1 = array();
+  $total2 = array();
+  $desc_unused = '';
   $raw_data1 = $xhprof_runs_impl->get_run($run1, $source, $desc_unused);
   $raw_data2 = $xhprof_runs_impl->get_run($run2, $source, $desc_unused);
 
@@ -437,7 +437,7 @@ function xhprof_get_content_by_run($xhprof_runs_impl, $run_id, $type,
                                    $critical_path) {
   if (!$run_id)
     return "";
-
+  $description = '';
   $raw_data = $xhprof_runs_impl->get_run($run_id, $source, $description);
   if (!$raw_data) {
     xhprof_error("Raw data is empty");
